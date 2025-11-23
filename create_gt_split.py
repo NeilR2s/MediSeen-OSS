@@ -4,7 +4,7 @@ import os
 import random
 
 # --- Configuration ---
-gt_file_path = 'output/gt.txt'
+gt_file_path = 'final_dataset/labels.txt'
 output_dir = 'output'
 train_csv_filename = 'train.csv'
 val_csv_filename = 'val.csv'
@@ -21,7 +21,7 @@ lines = []
 try:
     with open(gt_file_path, 'r', encoding='utf-8') as f:
         for i, line in enumerate(f):
-            parts = line.strip().split('\t', 1)
+            parts = line.strip().split(None, 1)
             if len(parts) == 2 and parts[0] and parts[1]:
                 lines.append(parts)
             else:
@@ -57,11 +57,11 @@ write_csv(os.path.join(output_dir, train_csv_filename), train_data)
 write_csv(os.path.join(output_dir, val_csv_filename), val_data)
 
 print("\nData preparation complete. Run the following commands to create the LMDB datasets.")
-print("\npython3 create_lmdb_dataset.py \
-  --imagePathOnly output/ \
+print("\npython3 create_lmdb_dataset.py create \
+  --imagePathOnly final_dataset/ \
   --gtFile output/train.csv \
   --outputPath data/train")
-print("\npython3 create_lmdb_dataset.py \
-  --imagePathOnly output/ \
+print("\npython3 create_lmdb_dataset.py create \
+  --imagePathOnly final_dataset/ \
   --gtFile output/val.csv \
   --outputPath data/val")

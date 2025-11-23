@@ -1,2 +1,5 @@
 output/
 saved_models/
+data/
+final_dataset/
+__pycache__/
